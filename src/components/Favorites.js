@@ -1,4 +1,5 @@
 import React from 'react'
+import MovieCard from './MovieCard'
 
 
 export default class Favorites extends React.Component {

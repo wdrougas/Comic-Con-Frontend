@@ -6,6 +6,23 @@ import Favorites from '../components/Favorites'
 
 
 export default class MainContainer extends React.Component {
+
+    constructor() {
+        super() 
+        this.state = {
+            movies: [],
+            favorites: [],
+            movieDetail: null,
+        }
+    }
+
+
+    componentDidMount = () => {
+        fetch('http://localhost:3000/movies')
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
+
     render() {
         return (
             <div>
