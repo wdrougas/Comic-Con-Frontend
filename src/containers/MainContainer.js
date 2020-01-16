@@ -18,16 +18,16 @@ export default class MainContainer extends React.Component {
 
 
     componentDidMount = () => {
-        fetch('http://localhost:3000/movies')
+        fetch('http://localhost:3000/movies?limit=6')
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(movies => this.setState({movies}))
     }
 
     render() {
         return (
-            <div>
+            <div class='ui text container'>
                 <Header />
-                <AllMovies />
+                <AllMovies movies={this.state.movies}/>
                 <Searchbar />
                 <Favorites />
             </div>
