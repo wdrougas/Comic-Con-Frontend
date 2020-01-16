@@ -26,7 +26,9 @@ export default class MainContainer extends React.Component {
     render() {
         return (
             <div class='ui text container'>
+                <br></br>
                 <Header />
+                <br></br>
                 <AllMovies movies={this.state.movies}/>
                 <Searchbar />
                 <Favorites />
