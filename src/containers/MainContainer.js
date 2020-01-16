@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import AllMovies from '../components/AllMovies'
 import Searchbar from '../components/Searchbar'
 import Favorites from '../components/Favorites'
+import { Container } from 'semantic-ui-react'
 
 
 export default class MainContainer extends React.Component {
@@ -18,10 +19,12 @@ export default class MainContainer extends React.Component {
 
 
     componentDidMount = () => {
-        fetch('http://localhost:3000/movies?limit=6')
+        fetch('http://localhost:3000/movies')
         .then(res => res.json())
         .then(movies => this.setState({movies}))
     }
+
+
 
     render() {
         return (
@@ -29,10 +32,24 @@ export default class MainContainer extends React.Component {
                 <br></br>
                 <Header />
                 <br></br>
+                <Container>
                 <AllMovies movies={this.state.movies}/>
+                </Container>
                 <Searchbar />
                 <Favorites favorites={this.state.favorites}/> 
             </div>
         )
     }
 }
+
+
+// <div class='ui text container'>
+// <br></br>
+// <Header />
+// <br></br>
+// <Container>
+// <AllMovies movies={this.state.movies}/>
+// </Container>
+// <Searchbar />
+// <Favorites favorites={this.state.favorites}/> 
+// </div>

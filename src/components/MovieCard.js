@@ -13,9 +13,18 @@ const MovieCard = (props) => (
           <span> {props.movie.rating}</span>
         </Card.Meta>
       </Card.Content>
+      <div class="ui vertical animated button" tabindex="0">
+      <div class="hidden content">Add</div>
+      <div class="visible content">
+      <i class="film icon"></i>
+      </div>
+      </div>
+
     </Card> 
     </div>
   )
+
+  
   
   export default MovieCard 
 
