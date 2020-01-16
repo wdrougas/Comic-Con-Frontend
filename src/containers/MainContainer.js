@@ -31,7 +31,7 @@ export default class MainContainer extends React.Component {
                 <br></br>
                 <AllMovies movies={this.state.movies}/>
                 <Searchbar />
-                <Favorites />
+                <Favorites favorites={this.state.favorites}/> 
             </div>
         )
     }

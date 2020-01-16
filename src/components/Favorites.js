@@ -5,7 +5,10 @@ import MovieCard from './MovieCard'
 export default class Favorites extends React.Component {
     render() {
         return (
-            <h2>Favorites Component</h2>
+            <div>Favorites Component
+            
+                { this.props.favorites.map(favorite => <MovieCard movie={favorite}/>)}
+            </div>
         )
     }
 }
