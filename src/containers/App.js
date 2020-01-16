@@ -18,16 +18,16 @@ function App() {
       width='thin'
     >
       <Menu.Item as='a'>
-        <Icon name='home' />
+        <Icon name='video play' />
+        Login
+      </Menu.Item>
+      <Menu.Item as='a'>
+        <Icon name='video' />
         Home
       </Menu.Item>
       <Menu.Item as='a'>
-        <Icon name='gamepad' />
-        Games
-      </Menu.Item>
-      <Menu.Item as='a'>
-        <Icon name='camera' />
-        Channels
+        <Icon name='search' />
+        Search
       </Menu.Item>
     </Sidebar>
 

@@ -33,23 +33,10 @@ export default class MainContainer extends React.Component {
                 <Header />
                 <br></br>
                 <Container>
-                <AllMovies movies={this.state.movies}/>
+                <AllMovies movies={this.state.movies} />
                 </Container>
-                <Searchbar />
-                <Favorites favorites={this.state.favorites}/> 
             </div>
         )
     }
 }
 
-
-// <div class='ui text container'>
-// <br></br>
-// <Header />
-// <br></br>
-// <Container>
-// <AllMovies movies={this.state.movies}/>
-// </Container>
-// <Searchbar />
-// <Favorites favorites={this.state.favorites}/> 
-// </div>

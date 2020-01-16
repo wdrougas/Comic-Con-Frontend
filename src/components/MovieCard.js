@@ -4,6 +4,7 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 const MovieCard = (props) => (
     <div class = "four wide column">
+
     <Card>
       <Image src={props.movie.image_url} wrapped ui={false} />
       <Card.Content>
