@@ -1,11 +1,12 @@
 import React from 'react';
 import AllMovies from '../components/AllMovies'
 import '../App.css';
-import {Container,Sidebar,Menu,Image,Icon,Header,Segment} from 'semantic-ui-react';
+import {Container,Sidebar,Menu,Image,Icon,Segment} from 'semantic-ui-react';
 import MovieCardDetails from '../components/MovieCardDetails'
 import {Route, Switch} from 'react-router-dom'
 import MovieCard from '../components/MovieCard';
-import Searchbar from '../components/Searchbar'
+import Header from '../components/Header'
+
 
 
 class App extends React.Component {
@@ -35,7 +36,7 @@ renderDetails = (card) => {
     return (
   
     <div>
-      <Header className='App' as='h1'>Welcome to ComicCon</Header>
+      <Header />
       <Switch>
       <div className='ui text container'>
           <br/>
@@ -48,7 +49,6 @@ renderDetails = (card) => {
           <Route exact path ='/' render={(props) => {return <AllMovies handleClick={this.renderDetails} movies={this.state.movies} />} }/>
           </div>
       </Switch>
-      <Searchbar />
     </div>
     );
   }

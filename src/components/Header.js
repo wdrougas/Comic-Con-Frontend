@@ -1,10 +1,11 @@
 import React from 'react'
+import Searchbar from './Searchbar'
 
 
 export default class Header extends React.Component {
     render() {
         return (
-            <h1 className="ui header">   </h1>
+            <Searchbar />
         )
     }
 }
