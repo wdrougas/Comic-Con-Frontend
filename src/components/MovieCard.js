@@ -15,16 +15,13 @@ const MovieCard = (props) => (
           <span> {props.movie.rating}</span>
         </Card.Meta>
       </Card.Content>
-      <div className="ui vertical animated button" tabIndex="0">
-        <Link to={`/movies/${props.movie.id}`} 
-        
-        
-        />
-      <div onClick={() => props.handleClick(props.movie)} className="hidden content">Details</div>
+      <Link to={`/movies/${props.movie.id}`}>
+      <div className="ui vertical animated button" tabIndex="0" >
       <div className="visible content">
       <i className="film icon"></i>
       </div>
       </div>
+      </Link>
 
     </Card> 
     </div>
@@ -35,21 +32,3 @@ const MovieCard = (props) => (
   export default MovieCard 
 
       
-//   <Card>
-//   <Image src={props.movie.image_url} wrapped ui={false} />
-//   <Card.Content>
-//     <Card.Header>Matthew</Card.Header>
-//     <Card.Meta>
-//       <span className='date'>Joined in 2015</span>
-//     </Card.Meta>
-//     <Card.Description>
-//       Matthew is a musician living in Nashville.
-//     </Card.Description>
-//   </Card.Content>
-//   <Card.Content extra>
-//     <a>
-//       <Icon name='user' />
-//       22 Friends
-//     </a>
-//   </Card.Content>
-// </Card>

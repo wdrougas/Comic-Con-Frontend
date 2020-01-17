@@ -45,8 +45,8 @@ resetMovieDetailState = () => {
           <br/>
           
           <Route path='/movies/:id' render={(props) => {
-          let movieID = props.match.params.id
-          let foundMovie = this.state.movies.find(movie => movie.id === movieID)
+            let movieID = parseInt(props.match.params.id)
+            let foundMovie = this.state.movies.find(movie => movie.id === movieID)
           return <MovieCardDetails movieDetails={foundMovie} resetMovieDetailState={this.resetMovieDetailState} />}} />
 
           <Route exact path ='/' render={(props) => {return <AllMovies handleClick={this.renderDetails} movies={this.state.movies} />} }/>

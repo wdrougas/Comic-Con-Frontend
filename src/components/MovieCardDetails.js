@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 
 const MovieCardDetails = (props) => {
@@ -34,10 +35,12 @@ const MovieCardDetails = (props) => {
       </div>
       </div>
       <div className="ui vertical animated button" tabIndex="0">
-      <div onClick={props.resetMovieDetailState}className="hidden content">Go Back</div>
+      <Link to={`/`}>
+      <div className="hidden content">Go Back</div>
       <div className="visible content">
       <i className="film icon"></i>
       </div>
+      </Link>
       </div>
 
     </Card> 
