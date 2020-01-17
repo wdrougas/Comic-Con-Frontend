@@ -1,15 +1,31 @@
 import React from 'react';
-import MainContainer from './MainContainer'
+import AllMovies from '../components/AllMovies'
 import '../App.css';
 import {Container,Sidebar,Menu,Image,Icon,Header,Segment} from 'semantic-ui-react'
 
 class App extends React.Component {
 
+  constructor() {
+    super() 
+    this.state = {
+        movies: [],
+        favorites: [],
+        movieDetail: null,
+    }
+}
+
+componentDidMount = () => {
+  fetch('http://localhost:3000/movies')
+  .then(res => res.json())
+  .then(movies => this.setState({movies}))
+}
+
   render() {
     
     return (
-      <Container className="App">
   
+      <div>
+      <Header className='App' as='h1'>Welcome to ComicCon</Header>
   <Sidebar.Pushable as={Segment}>
       <Sidebar
         as={Menu}
@@ -32,19 +48,22 @@ class App extends React.Component {
           <Icon name='search' />
           Search
         </Menu.Item>
+        <Menu.Item as='a'>
+          <Icon name='film' />
+          Favorites
+        </Menu.Item>
       </Sidebar>
   
   
+      
       <Sidebar.Pusher>
-        <Segment basic>
-          <Header as='h1'>Welcome to ComicCon</Header>
-        <MainContainer />
-          <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-        </Segment>
+        <div className='ui text container'>
+          <br/>
+          <AllMovies movies={this.state.movies} />
+        </div>
       </Sidebar.Pusher>
     </Sidebar.Pushable>
-  
-      </Container>
+    </div>
     );
   }
 }
