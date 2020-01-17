@@ -3,7 +3,7 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 
 const MovieCard = (props) => (
-    <div class = "four wide column">
+    <div className= "four wide column">
 
     <Card>
       <Image src={props.movie.image_url} wrapped ui={false} />
@@ -14,10 +14,10 @@ const MovieCard = (props) => (
           <span> {props.movie.rating}</span>
         </Card.Meta>
       </Card.Content>
-      <div class="ui vertical animated button" tabindex="0">
-      <div class="hidden content">Add</div>
-      <div class="visible content">
-      <i class="film icon"></i>
+      <div className="ui vertical animated button" tabIndex="0">
+      <div className="hidden content">Add</div>
+      <div className="visible content">
+      <i className="film icon"></i>
       </div>
       </div>
 
