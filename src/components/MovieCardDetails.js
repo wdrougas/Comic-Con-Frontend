@@ -34,7 +34,7 @@ const MovieCardDetails = (props) => {
       </div>
       </div>
       <div className="ui vertical animated button" tabIndex="0">
-      <div className="hidden content">Go Back</div>
+      <div onClick={props.resetMovieDetailState}className="hidden content">Go Back</div>
       <div className="visible content">
       <i className="film icon"></i>
       </div>
