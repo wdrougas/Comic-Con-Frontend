@@ -60,19 +60,3 @@ resetMovieDetailState = () => {
 export default App;
 
 
-
-{/* <div>
-<Header className='App' as='h1'>Welcome to ComicCon</Header>
-<Switch>
-<div className='ui text container'>
-    <br/>
-    {
-      this.state.movieDetail ?
-    <MovieCardDetails resetMovieDetailState={this.resetMovieDetailState} 
-    movieDetails={this.state.movieDetail}/> : 
-    <AllMovies handleClick={this.renderDetails} movies={this.state.movies} />
-    }
-</div>
-</Switch>
-</div> */}
-
