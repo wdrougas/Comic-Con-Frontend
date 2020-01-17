@@ -15,7 +15,7 @@ const MovieCard = (props) => (
         </Card.Meta>
       </Card.Content>
       <div className="ui vertical animated button" tabIndex="0">
-      <div className="hidden content">Add</div>
+      <div onClick={() => props.handleClick(props.movie)} className="hidden content">Details</div>
       <div className="visible content">
       <i className="film icon"></i>
       </div>

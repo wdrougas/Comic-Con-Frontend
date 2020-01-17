@@ -2,6 +2,7 @@ import React from 'react';
 import AllMovies from '../components/AllMovies'
 import '../App.css';
 import {Container,Sidebar,Menu,Image,Icon,Header,Segment} from 'semantic-ui-react'
+import MovieCardDetails from '../components/MovieCardDetails';
 
 
 class App extends React.Component {
@@ -21,6 +22,10 @@ componentDidMount = () => {
   .then(movies => this.setState({movies}))
 }
 
+renderDetails = (card) => {
+  this.setState({movieDetail: card})
+}
+
   render() {
     
     return (
@@ -29,7 +34,10 @@ componentDidMount = () => {
       <Header className='App' as='h1'>Welcome to ComicCon</Header>>
       <div className='ui text container'>
           <br/>
-          <AllMovies movies={this.state.movies} />
+          {
+            this.state.movieDetail ?
+          <MovieCardDetails movieDetails={this.state.movieDetail}/> : <AllMovies handleClick={this.renderDetails} movies={this.state.movies} />
+          }
       </div>
     </div>
     );
