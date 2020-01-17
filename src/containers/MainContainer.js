@@ -28,7 +28,7 @@ export default class MainContainer extends React.Component {
 
     render() {
         return (
-            <div class='ui text container'>
+            <div className='ui text container'>
                 <br></br>
                 <Header />
                 <br></br>
