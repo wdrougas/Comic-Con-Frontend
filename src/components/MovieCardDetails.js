@@ -1,33 +1,32 @@
 
 import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Container, Icon, Image } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 
 const MovieCardDetails = (props) => {
     return (
         <div className = 'ui two column centered grid'>
-    <Card>
-      <Image src={props.movieDetails.image_url} wrapped ui={false} />
-      <Card.Content>
-        <Card.Header>{props.movieDetails.name}</Card.Header>
-        <Card.Meta>
+    <Container>
+      <img src={props.movieDetails.image_url} wrapped ui={false} />
+      
+        <h2>{props.movieDetails.name}</h2>
+        <h3>
           Rating: 
           <span> {props.movieDetails.rating}</span>
-        </Card.Meta>
-        <Card.Meta>
+        </h3>
+        <h3>
           Budget: 
           <span> {props.movieDetails.budget}</span>
-        </Card.Meta>
-        <Card.Meta>
+        </h3>
+        <h3>
           Box Office Revenue: 
           <span> {props.movieDetails.box_office_revenue}</span>
-        </Card.Meta>
-        <Card.Meta>
+        </h3>
+        <p>
           Description: 
-          <span> {props.movieDetails.description}</span>
-        </Card.Meta>
-      </Card.Content>
+          <span> {props.movieDetails.description} </span>
+        </p>
       <div className="ui vertical animated button" tabIndex="0">
       <div className="hidden content">Add to Favorites</div>
       <div className="visible content">
@@ -43,7 +42,7 @@ const MovieCardDetails = (props) => {
       </Link>
       </div>
 
-    </Card> 
+    </Container> 
     </div>
     )
 
