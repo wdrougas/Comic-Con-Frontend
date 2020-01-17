@@ -5,6 +5,7 @@ import {Container,Sidebar,Menu,Image,Icon,Header,Segment} from 'semantic-ui-reac
 import MovieCardDetails from '../components/MovieCardDetails'
 import {Route, Switch} from 'react-router-dom'
 import MovieCard from '../components/MovieCard';
+import Searchbar from '../components/Searchbar'
 
 
 class App extends React.Component {
@@ -28,11 +29,6 @@ renderDetails = (card) => {
   this.setState({movieDetail: card})
 }
 
-resetMovieDetailState = () => {
-  this.setState({
-    movieDetail: null
-  })
-}
 
   render() {
     
@@ -47,11 +43,12 @@ resetMovieDetailState = () => {
           <Route path='/movies/:id' render={(props) => {
             let movieID = parseInt(props.match.params.id)
             let foundMovie = this.state.movies.find(movie => movie.id === movieID)
-          return <MovieCardDetails movieDetails={foundMovie} resetMovieDetailState={this.resetMovieDetailState} />}} />
+          return <MovieCardDetails movieDetails={foundMovie} />}} />
 
           <Route exact path ='/' render={(props) => {return <AllMovies handleClick={this.renderDetails} movies={this.state.movies} />} }/>
           </div>
       </Switch>
+      <Searchbar />
     </div>
     );
   }

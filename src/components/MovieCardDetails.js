@@ -2,6 +2,7 @@
 import React from 'react'
 import { Container, Icon, Image } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
+import NumberFormat from 'react-number-format'
 
 
 const MovieCardDetails = (props) => {
@@ -16,12 +17,12 @@ const MovieCardDetails = (props) => {
           <span> {props.movieDetails.rating}</span>
         </h3>
         <h3>
-          Budget: 
-          <span> {props.movieDetails.budget}</span>
+          Budget:
+          <NumberFormat value={props.movieDetails.budget} displayType={'text'} thousandSeparator={true} prefix={' $'} />
         </h3>
         <h3>
           Box Office Revenue: 
-          <span> {props.movieDetails.box_office_revenue}</span>
+          <NumberFormat value={props.movieDetails.box_office_revenue} displayType={'text'} thousandSeparator={true} prefix={' $'} />
         </h3>
         <p>
           Description: 
