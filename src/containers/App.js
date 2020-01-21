@@ -57,7 +57,7 @@ addFavorites = (movieDetails) => {
   .then(response => {
     if (response.ok) {
       // alert("Movie added to your favorites")
-      swal("Good job!", "Movie Added to Your Favorites!", "success");
+      swal("Great!", "Movie Added to Your Favorites!", "success");
     } else {
       swal("Something went wrong", "failure");
     }
