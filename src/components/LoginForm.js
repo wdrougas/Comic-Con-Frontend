@@ -1,5 +1,4 @@
 import React from 'react'
-import {withRouter} from 'react-router'
 import {Button, Form, Segment, Message} from 'semantic-ui-react'
 
 

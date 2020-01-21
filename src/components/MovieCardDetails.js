@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Container, Icon, Image } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import NumberFormat from 'react-number-format'
 
