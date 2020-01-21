@@ -6,6 +6,7 @@ import MovieCardDetails from '../components/MovieCardDetails'
 import {Route, Switch} from 'react-router-dom'
 import MovieCard from '../components/MovieCard';
 import Header from '../components/Header'
+import Searchbar from '../components/Searchbar'
 
 
 
@@ -17,6 +18,7 @@ class App extends React.Component {
         movies: [],
         favorites: [],
         movieDetail: null,
+        search: ''
     }
 }
 
@@ -30,6 +32,14 @@ renderDetails = (card) => {
   this.setState({movieDetail: card})
 }
 
+onSearch = (event) => {
+  this.setState({search: event.target.value})
+}
+
+filteredMovies = () => {
+  return this.state.movies.filter(movie => movie.name.toLowerCase().includes(this.state.search.toLowerCase()))
+}
+
 
   render() {
     
@@ -37,6 +47,7 @@ renderDetails = (card) => {
   
     <div>
       <Header />
+      {this.state.movieDetail ? null : <Searchbar onSearch={this.onSearch}/>}
       <Switch>
       <div className='ui text container'>
           <br/>
@@ -44,9 +55,9 @@ renderDetails = (card) => {
           <Route path='/movies/:id' render={(props) => {
             let movieID = parseInt(props.match.params.id)
             let foundMovie = this.state.movies.find(movie => movie.id === movieID)
-          return <MovieCardDetails movieDetails={foundMovie} />}} />
+          return foundMovie ? <MovieCardDetails movieDetails={foundMovie} />: null}} />
 
-          <Route exact path ='/' render={(props) => {return <AllMovies handleClick={this.renderDetails} movies={this.state.movies} />} }/>
+          <Route exact path ='/' render={(props) => {return <AllMovies handleClick={this.renderDetails} movies={this.filteredMovies()} />} }/>
           </div>
       </Switch>
     </div>
