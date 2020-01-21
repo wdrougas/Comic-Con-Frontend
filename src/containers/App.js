@@ -72,9 +72,6 @@ addFavorites = (movieDetails) => {
   }
 
 
-
-
-
   render() {
     
     return (
@@ -104,17 +101,3 @@ addFavorites = (movieDetails) => {
 export default App;
 
 
-
-
-
-// if (response.ok) {
-//   // alert("Movie added to your favorites")
-//   swal("Great!", "Movie Added to Your Favorites!", "success");
-// } else {
-//   swal("Something went wrong", "failure");
-// }
-// })
-// .catch(error => ("this is the error"))
-// } else {
-// swal("Oops!", "Movie is already added to your favorites!", "error")
-// }
