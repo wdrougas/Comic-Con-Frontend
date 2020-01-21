@@ -7,7 +7,7 @@ export default class AllMovies extends React.Component {
         return (
         <div className="ui grid">
             
-            {this.props.movies.map(movie => <MovieCard key ={movie.id} movie={movie} handleClick={this.props.handleClick}/>) }</div>
+            {this.props.movies.map(movie => <MovieCard key ={movie.id} movie={movie} />) }</div>
         )
     }
 }

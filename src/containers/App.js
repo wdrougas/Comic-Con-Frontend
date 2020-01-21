@@ -28,9 +28,9 @@ componentDidMount = () => {
   .then(movies => this.setState({movies}))
 }
 
-renderDetails = (card) => {
-  this.setState({movieDetail: card})
-}
+// renderDetails = (card) => {
+//   this.setState({movieDetail: card})
+// }
 
 onSearch = (event) => {
   this.setState({search: event.target.value})
@@ -57,7 +57,7 @@ filteredMovies = () => {
             let foundMovie = this.state.movies.find(movie => movie.id === movieID)
           return foundMovie ? <MovieCardDetails movieDetails={foundMovie} />: null}} />
 
-          <Route exact path ='/' render={(props) => {return <AllMovies handleClick={this.renderDetails} movies={this.filteredMovies()} />} }/>
+          <Route exact path ='/' render={(props) => {return <AllMovies movies={this.filteredMovies()} />} }/>
           </div>
       </Switch>
     </div>
