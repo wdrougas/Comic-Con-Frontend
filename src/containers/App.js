@@ -48,28 +48,38 @@ updateUser = (user) => {
 
 
 addFavorites = (movieDetails) => {
+
+  const favoritesCopy =[...this.state.favorites, movieDetails]
+  this.setState({favorites: favoritesCopy})
+  if (!this.state.favorites.includes(movieDetails)) {
+
+    const configOptions = {
+        method:"POST" ,
+        headers: {
+          "Content-Type":"application/json",
+          "Accept":"applicatoin/json"
+        } ,
+        body: JSON.stringify({user_id: this.state.currentUser.id, movie_id: movieDetails.id}) 
+    }
   
-  const configOptions = {
-      method:"POST" ,
-      headers: {
-        "Content-Type":"application/json",
-        "Accept":"applicatoin/json"
-      } ,
-      body: JSON.stringify({user_id: this.state.currentUser.id, movie_id: movieDetails.id}) 
+    fetch('http://localhost:3000/favorites',configOptions)
+    .then(response => {
+      if (response.ok) {
+        // alert("Movie added to your favorites")
+        swal("Great!", "Movie Added to Your Favorites!", "success");
+      } else {
+        swal("Something went wrong", "failure");
+      }
+    })
+    .catch(error => ("this is the error"))
+  } else {
+    swal("Oops!", "Movie is already added to your favorites!", "error")
   }
 
-  fetch('http://localhost:3000/favorites',configOptions)
-  .then(response => {
-    if (response.ok) {
-      // alert("Movie added to your favorites")
-      swal("Great!", "Movie Added to Your Favorites!", "success");
-    } else {
-      swal("Something went wrong", "failure");
-    }
-  }) 
-  .catch(error => ("this is the error"))
- 
-}
+   
+
+  }
+
 
 
 

@@ -11,7 +11,9 @@ export default class Header extends React.Component {
             <div className='ui header'>
                 <div className='App'>
                 <h1>ComicCon</h1>
-        {this.props.user ? <Image circular src={this.props.user.profile_photo}/> : null}
+                </div>
+                <div className='Photo'>
+                    {this.props.user ? <Image circular src={this.props.user.profile_photo} avatar/> : null}
                 </div>
             </div>
         )
