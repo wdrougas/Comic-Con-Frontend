@@ -9,6 +9,7 @@ import Header from '../components/Header'
 import Searchbar from '../components/Searchbar'
 import swal from 'sweetalert'
 import LoginForm from '../components/LoginForm'
+import FavoriteButton from '../components/FavoriteButton'
 
 
 class App extends React.Component {
@@ -30,9 +31,6 @@ componentDidMount = () => {
   .then(movies => this.setState({movies}))
 }
 
-// renderDetails = (card) => {
-//   this.setState({movieDetail: card})
-// }
 
 onSearch = (event) => {
   this.setState({search: event.target.value})
@@ -44,11 +42,21 @@ filteredMovies = () => {
 
 updateUser = (user) => {
   this.setState({currentUser: user})
-}
+} 
 
+/*  Added to render favorites */ 
+updateFavorites = () => {
+  fetch('http://localhost:3000/favorites')
+  .then(response => response.json())
+  .then(AllFavorites => console.log(AllFavorites)) 
+  //  .then(AllFavorites =>  {
+       
+  //  })  
+}  
+
+ 
 
 addFavorites = (movieDetails) => {
-
     const configOptions = {
         method:"POST" ,
         headers: {
@@ -57,13 +65,12 @@ addFavorites = (movieDetails) => {
         } ,
         body: JSON.stringify({user_id: this.state.currentUser.id, movie_id: movieDetails.id}) 
     }
-  
+
     fetch('http://localhost:3000/favorites',configOptions)
     .then(response => response.json())
-    // .then(data => console.log(data))
     .then(data => { 
       if (data.message === "Movie added to favorites!") {
-        swal("Alert!", data.message, "success")
+        swal("Done!", data.message, "success")
       } else {
         swal("Error!", data.message, 'error')
       }
@@ -78,20 +85,30 @@ addFavorites = (movieDetails) => {
   
     <div>
       <Header user={this.state.currentUser}/>
-      {this.state.movieDetail ? null : <Searchbar onSearch={this.onSearch}/>}
-      <Switch>
-      {/* <div className='ui text container'> */}
-          <Route exact path ="/login" render={() => this.state.currentUser ? <AllMovies user={this.state.currentUser} movies={this.filteredMovies()}/>: <LoginForm updateUser={this.updateUser}/>} />
-          <Route exact path ='/' render={() => this.state.currentUser ? <AllMovies user={this.state.currentUser} movies={this.filteredMovies()}/> : <Redirect to="/login" /> }/>
+      {this.state.movieDetail ? null : <Searchbar onSearch={this.onSearch}/>} 
+
+      {
+        this.state.currentUser ? <FavoriteButton updateFavorites={this.updateFavorites} /> : null 
+      } 
+      <br/> 
+
+      <Switch> 
+  
+          <Route exact path ="/login" 
+          render={() => this.state.currentUser ? <AllMovies user={this.state.currentUser} 
+          movies={this.filteredMovies()}/>: <LoginForm updateUser={this.updateUser}/>} />
+
+          <Route exact path ='/' render={() => this.state.currentUser ? <AllMovies user={this.state.currentUser} 
+          movies={this.filteredMovies()}/> : <Redirect to="/login" /> }/>
+
           <Route path='/movies/:id' render={(props) => {
             let movieID = parseInt(props.match.params.id)
             let foundMovie = this.state.movies.find(movie => movie.id === movieID)
           return foundMovie ? <MovieCardDetails 
           movieDetails={foundMovie} 
           addFavorites ={this.addFavorites}
-          />: null}} />
+          />: null}} /> 
 
-          {/* </div> */}
       </Switch>
     </div>
     );
