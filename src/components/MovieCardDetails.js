@@ -29,7 +29,8 @@ const MovieCardDetails = (props) => {
           <span> {props.movieDetails.description} </span>
         </p>
       <div className="ui vertical animated button" tabIndex="0">
-      <div className="hidden content">Add to Favorites</div>
+      <div className="hidden content"
+      onClick={() => props.addFavorites(props.movieDetails)}>Add to Favorites</div>
       <div className="visible content">
       <i className="star icon"></i>
       </div>

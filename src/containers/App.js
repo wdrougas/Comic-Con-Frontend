@@ -7,6 +7,7 @@ import {Route, Switch} from 'react-router-dom'
 import MovieCard from '../components/MovieCard';
 import Header from '../components/Header'
 import Searchbar from '../components/Searchbar'
+import swal from 'sweetalert'
 
 
 
@@ -41,6 +42,33 @@ filteredMovies = () => {
 }
 
 
+addFavorites = (movieDetails) => {
+  
+  const configOptions = {
+      method:"POST" ,
+      headers: {
+        "Content-Type":"application/json",
+        "Accept":"applicatoin/json"
+      } ,
+      body: JSON.stringify({user_id:1 , movie_id: movieDetails.id}) 
+  }
+
+  fetch('http://localhost:3000/favorites',configOptions)
+  .then(response => {
+    if (response.ok) {
+      // alert("Movie added to your favorites")
+      swal("Good job!", "Movie Added to Your Favorites!", "success");
+    } else {
+      swal("Something went wrong", "failure");
+    }
+  }) 
+  .catch(error => ("this is the error"))
+ 
+}
+
+
+
+
   render() {
     
     return (
@@ -49,16 +77,18 @@ filteredMovies = () => {
       <Header />
       {this.state.movieDetail ? null : <Searchbar onSearch={this.onSearch}/>}
       <Switch>
-      <div className='ui text container'>
-          <br/>
-          
+      {/* <div className='ui text container'> */}
+  
           <Route path='/movies/:id' render={(props) => {
             let movieID = parseInt(props.match.params.id)
             let foundMovie = this.state.movies.find(movie => movie.id === movieID)
-          return foundMovie ? <MovieCardDetails movieDetails={foundMovie} />: null}} />
+          return foundMovie ? <MovieCardDetails 
+          movieDetails={foundMovie} 
+          addFavorites ={this.addFavorites}
+          />: null}} />
 
           <Route exact path ='/' render={(props) => {return <AllMovies movies={this.filteredMovies()} />} }/>
-          </div>
+          {/* </div> */}
       </Switch>
     </div>
     );
