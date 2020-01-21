@@ -99,6 +99,12 @@ addFavorites = (movieDetails) => {
     <div>
       <HeaderComponent user={this.state.currentUser}/>
       {this.state.currentUser ? <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/>: null }
+      {
+        this.state.currentUser ? <FavoriteButton /> : null 
+      }
+      
+      <br/> 
+
       <Switch>
       {/* <div className='ui text container'> */}
           <Route exact path ="/login" render={() => this.state.currentUser ? <AllMovies user={this.state.currentUser} movies={this.filteredMovies()} />: <LoginForm updateUser={this.updateUser}/>} />
