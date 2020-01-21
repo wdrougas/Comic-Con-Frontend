@@ -6,7 +6,6 @@ import {Image} from 'semantic-ui-react'
 
 export default class Header extends React.Component {
     render() {
-        console.log(this.props)
         return (
             <div className='ui header'>
                 <div className='App'>

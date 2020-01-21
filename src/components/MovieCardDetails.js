@@ -9,7 +9,7 @@ const MovieCardDetails = (props) => {
     return (
         <div className = 'ui two column centered grid'>
     <Container>
-      <img src={props.movieDetails.image_url} wrapped ui={false} />
+      <img src={props.movieDetails.image_url} wrapped="false" />
       
         <h2>{props.movieDetails.name}</h2>
         <h3>
