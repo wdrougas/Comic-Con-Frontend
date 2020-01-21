@@ -85,9 +85,6 @@ addFavorites = (movieDetails) => {
   }
 
 
-
-
-
   render() {
     
     return (
