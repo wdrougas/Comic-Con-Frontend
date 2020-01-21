@@ -1,13 +1,15 @@
 import React from 'react';
 import AllMovies from '../components/AllMovies'
 import '../App.css';
-import {Container,Sidebar,Menu,Image,Icon,Segment} from 'semantic-ui-react';
+// import {Container,Sidebar,Menu,Image,Icon,Segment} from 'semantic-ui-react';
 import MovieCardDetails from '../components/MovieCardDetails'
 import {Route, Switch} from 'react-router-dom'
-import MovieCard from '../components/MovieCard';
+// import MovieCard from '../components/MovieCard';
 import Header from '../components/Header'
 import Searchbar from '../components/Searchbar'
 import swal from 'sweetalert'
+import LoginForm from '../components/LoginForm'
+import Profile from '../components/Profile' 
 
 
 
@@ -19,7 +21,8 @@ class App extends React.Component {
         movies: [],
         favorites: [],
         movieDetail: null,
-        search: ''
+        search: '',
+        currentUser: null 
     }
 }
 
@@ -66,30 +69,27 @@ addFavorites = (movieDetails) => {
  
 }
 
-
-
+updateUser = (user) => {
+  this.setState({currentUser: user})
+} 
 
   render() {
-    
     return (
-  
     <div>
       <Header />
       {this.state.movieDetail ? null : <Searchbar onSearch={this.onSearch}/>}
       <Switch>
-      {/* <div className='ui text container'> */}
-  
           <Route path='/movies/:id' render={(props) => {
             let movieID = parseInt(props.match.params.id)
             let foundMovie = this.state.movies.find(movie => movie.id === movieID)
-          return foundMovie ? <MovieCardDetails 
-          movieDetails={foundMovie} 
-          addFavorites ={this.addFavorites}
+          return foundMovie ? <MovieCardDetails movieDetails={foundMovie} addFavorites ={this.addFavorites}
           />: null}} />
-
-          <Route exact path ='/' render={(props) => {return <AllMovies movies={this.filteredMovies()} />} }/>
-          {/* </div> */}
-      </Switch>
+          <Route exact path ='/movies' render={(props) => {return <AllMovies movies={this.filteredMovies()} />} }/>
+          <Route exact path="/login" render={() => 
+          this.state.currentUser ? <AllMovies movies={this.filteredMovies()} user={this.state.currentUser}/> : 
+          <LoginForm updateUser={this.state.updateUser}/>  
+           } /> 
+      </Switch> 
     </div>
     );
   }
