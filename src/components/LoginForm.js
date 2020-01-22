@@ -1,8 +1,9 @@
 import React from 'react'
 import {Button, Form, Segment, Message} from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
     state = {
         username: '',
         password: ''
@@ -62,3 +63,5 @@ export default class LoginForm extends React.Component {
         )
     }
 }
+
+export default withRouter(LoginForm)
