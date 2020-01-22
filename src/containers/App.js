@@ -69,9 +69,8 @@ addFavorites = (movieDetails) => {
     .then(response => response.json())
     .then(data => { 
       if (data.message === "Movie added to favorites!") {
-        const newArray = Object.values(data.favorite)
-        console.log(newArray)
-        this.setState({favoriteObjects: [...this.state.favoriteObjects, data.favorite]})
+        let newObj = JSON.parse(data.favorite)
+        this.setState({favoriteObjects: [...this.state.favoriteObjects, newObj]})
         swal("Done!", data.message, "success")
       } else {
         swal("Error!", data.message, 'error')
@@ -80,23 +79,23 @@ addFavorites = (movieDetails) => {
 
   }
 
-  removeFromFavorites = (movieDetails) => {
-    if (this.state.favorites.includes(movieDetails)) {
-      const configOptions = {
-        method:"DELETE",
-        headers: {
-          "Content-Type":"application/json",
-          "Accept":"application/json"
-        }
-      }
-      fetch(`http://localhost:3000/favorites/${movieDetails.id}`, configOptions)
-      .then(response => response.json())
-      .then(data => console.log(data))
+  // NOT WORKING
+  // removeFromFavorites = (favoriteObj) => {
+  //   if (this.state.favoriteObjects.includes(favoriteObj)) {
+  //     const configOptions = {
+  //       method:"DELETE",
+  //       headers: {
+  //         "Content-Type":"application/json",
+  //         "Accept":"application/json"
+  //       }
+  //     }
+  //     fetch(`http://localhost:3000/favorites/${favoriteObj[0].id}`, configOptions)
+  //     .then(response => response.json())
 
-    } else {
-      alert("Movie is not included in your favorites")
-    }
-  }
+  //   } else {
+  //     alert("Movie is not included in your favorites")
+  //   }
+  // }
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value})
@@ -134,6 +133,7 @@ addFavorites = (movieDetails) => {
           movieDetails={foundMovie} 
           addFavorites ={this.addFavorites}
           removeFromFavorites={this.removeFromFavorites}
+          favorite={this.state.favoriteObjects}
           />: null}} /> 
           <Route exact path='/favorites/:id' render={() => this.state.favorites ? <AllMovies movies={this.state.favorites} /> : null}/>
       </Switch>

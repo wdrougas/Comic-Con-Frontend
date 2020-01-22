@@ -10,9 +10,9 @@ export default class Searchbar extends React.Component {
                     placeholder="Search ComicCon"
                     onChange={this.props.onSearch}
                 />
-                <br/>
+                {/* <br/>
                 <label>Sort By Name:</label>
-                <input type='radio' value='name' name='sort' checked={this.props.sort === 'name' ? true : false} onChange={this.props.handleChange}/>
+                <input type='radio' value='name' name='sort' checked={this.props.sort === 'name' ? true : false} onChange={this.props.handleChange}/> */}
             </div>
         )
     }
