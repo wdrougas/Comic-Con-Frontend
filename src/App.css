@@ -5,6 +5,23 @@
 } */
 
 
+body::after {
+  content: "";
+  background: url('./images/reel.jpg');
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;  
+  background-attachment: fixed; 
+  background-position: center;  
+  background-size: cover; 
+}
+
+
+
 .App {
   text-align: center;
   margin-bottom: 20px ; 
