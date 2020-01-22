@@ -46,6 +46,10 @@ updateUser = (user) => {
   this.setState({currentUser: user})
 } 
 
+logout = () => {
+  this.setState({currentUser: null})
+}
+
 
 showFavorites = (user) => {
   fetch(`http://localhost:3000/users/${user.id}`)
@@ -116,7 +120,7 @@ addFavorites = (movieDetails) => {
     return (
   
     <div>
-      <HeaderComponent user={this.state.currentUser}/>
+      <HeaderComponent handleClick={this.logout} user={this.state.currentUser}/>
       {this.state.currentUser ? <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/>: null }
       <br/> 
 
