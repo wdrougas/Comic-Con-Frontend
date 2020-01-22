@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
         movies: [],
         favorites: [],
+        favoriteObjects: [],
         movieDetail: null,
         search: '',
         currentUser: null,
@@ -59,7 +60,7 @@ addFavorites = (movieDetails) => {
         method:"POST" ,
         headers: {
           "Content-Type":"application/json",
-          "Accept":"applicatoin/json"
+          "Accept":"application/json"
         } ,
         body: JSON.stringify({user_id: this.state.currentUser.id, movie_id: movieDetails.id}) 
     }
@@ -68,12 +69,33 @@ addFavorites = (movieDetails) => {
     .then(response => response.json())
     .then(data => { 
       if (data.message === "Movie added to favorites!") {
+        const newArray = Object.values(data.favorite)
+        console.log(newArray)
+        this.setState({favoriteObjects: [...this.state.favoriteObjects, data.favorite]})
         swal("Done!", data.message, "success")
       } else {
         swal("Error!", data.message, 'error')
       }
     })
 
+  }
+
+  removeFromFavorites = (movieDetails) => {
+    if (this.state.favorites.includes(movieDetails)) {
+      const configOptions = {
+        method:"DELETE",
+        headers: {
+          "Content-Type":"application/json",
+          "Accept":"application/json"
+        }
+      }
+      fetch(`http://localhost:3000/favorites/${movieDetails.id}`, configOptions)
+      .then(response => response.json())
+      .then(data => console.log(data))
+
+    } else {
+      alert("Movie is not included in your favorites")
+    }
   }
 
   handleChange = (e) => {
@@ -111,6 +133,7 @@ addFavorites = (movieDetails) => {
           return foundMovie ? <MovieCardDetails 
           movieDetails={foundMovie} 
           addFavorites ={this.addFavorites}
+          removeFromFavorites={this.removeFromFavorites}
           />: null}} /> 
           <Route exact path='/favorites/:id' render={() => this.state.favorites ? <AllMovies movies={this.state.favorites} /> : null}/>
       </Switch>

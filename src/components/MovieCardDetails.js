@@ -36,14 +36,20 @@ const MovieCardDetails = (props) => {
       </div>
       </div>
       <div className="ui vertical animated button" tabIndex="0">
-      <Link to={`/`}>
+      {<Link to={`/`}>
       <div className="hidden content">Go Back</div>
       <div className="visible content">
       <i className="film icon"></i>
       </div>
-      </Link>
+      </Link>}
       </div>
-
+      <div className="ui vertical animated button" tabIndex="0">
+      <div className="hidden content"
+      onClick={() => props.removeFromFavorites(props.movieDetails)}>Remove from Favorites</div>
+      <div className="visible content">
+      <i className="trash icon"></i>
+      </div>
+      </div>
     </Container> 
     </div>
     )
