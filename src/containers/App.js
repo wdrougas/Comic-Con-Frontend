@@ -8,6 +8,7 @@ import Searchbar from '../components/Searchbar'
 import swal from 'sweetalert'
 import LoginForm from '../components/LoginForm'
 import FavoriteButton from '../components/FavoriteButton'
+import AllMoviesButton from '../components/AllMoviesButton'
 
 
 class App extends React.Component {
@@ -44,14 +45,11 @@ updateUser = (user) => {
   this.setState({currentUser: user})
 } 
 
-/*  Added to render favorites */ 
-updateFavorites = () => {
-  fetch('http://localhost:3000/favorites')
-  .then(response => response.json())
-  .then(AllFavorites => console.log(AllFavorites)) 
-  //  .then(AllFavorites =>  {
-       
-  //  })  
+
+showFavorites = (user) => {
+  fetch(`http://localhost:3000/users/${user.id}`)
+  .then(resp => resp.json())
+  .then(data => this.setState({favorites: data.movies}))
 }  
 
  
@@ -99,10 +97,8 @@ addFavorites = (movieDetails) => {
     <div>
       <HeaderComponent user={this.state.currentUser}/>
       {this.state.currentUser ? <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/>: null }
-      {
-        this.state.currentUser ? <FavoriteButton /> : null 
-      }
-      
+      {this.state.currentUser ? <FavoriteButton user={this.state.currentUser} handleClick={this.showFavorites}/> : null }
+      {this.state.currentUser ? <AllMoviesButton user={this.state.currentUser} handleClick={this.showFavorites}/> : null }
       <br/> 
 
       <Switch>
@@ -116,7 +112,7 @@ addFavorites = (movieDetails) => {
           movieDetails={foundMovie} 
           addFavorites ={this.addFavorites}
           />: null}} /> 
-
+          <Route exact path='/favorites/:id' render={() => this.state.favorites ? <AllMovies movies={this.state.favorites} /> : null}/>
       </Switch>
     </div>
     );
