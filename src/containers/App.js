@@ -2,7 +2,7 @@ import React from 'react';
 import AllMovies from '../components/AllMovies'
 import '../App.css';
 import MovieCardDetails from '../components/MovieCardDetails'
-import {Route, Switch, Redirect, withRouter} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
 import HeaderComponent from '../components/HeaderComponent'
 import Searchbar from '../components/Searchbar'
 import swal from 'sweetalert'
@@ -38,8 +38,8 @@ onSearch = (event) => {
   this.setState({search: event.target.value})
 }
 
-filteredMovies = () => {
-  return this.state.movies.filter(movie => movie.name.toLowerCase().includes(this.state.search.toLowerCase()))
+filteredMovies = (movies) => {
+  return movies.filter(movie => movie.name.toLowerCase().includes(this.state.search.toLowerCase()))
 }
 
 updateUser = (user) => {
@@ -121,13 +121,12 @@ addFavorites = (movieDetails) => {
   
     <div>
       <HeaderComponent handleClick={this.logout} user={this.state.currentUser}/>
-      {this.state.currentUser ? <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/>: null }
       <br/> 
 
       <Switch>
       {/* <div className='ui text container'> */}
           <Route exact path ="/login" render={() => this.state.currentUser ? <Redirect to='/' />: <LoginForm updateUser={this.updateUser}/>} />
-          <Route exact path ='/' render={() => this.state.currentUser ? <div> <FavoriteButton user={this.state.currentUser} handleClick={this.showFavorites}/> <br/><AllMovies user={this.state.currentUser} movies={this.filteredMovies()} /></div> : <Redirect to="/login" /> }/>
+          <Route exact path ='/' render={() => this.state.currentUser ? <div> <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/> <FavoriteButton user={this.state.currentUser} handleClick={this.showFavorites}/> <br/><AllMovies user={this.state.currentUser} movies={this.filteredMovies(this.state.movies)} /></div> : <Redirect to="/login" /> }/>
           <Route path='/movies/:id' render={(props) => {
             let movieID = parseInt(props.match.params.id)
             let foundMovie = this.state.movies.find(movie => movie.id === movieID)
@@ -135,16 +134,19 @@ addFavorites = (movieDetails) => {
           movieDetails={foundMovie} 
           addFavorites ={this.addFavorites}
           removeFromFavorites={this.removeFromFavorites}
-          favorite={this.state.favoriteObjects}
           />: null}} /> 
-          <Route exact path='/favorites/:id' render={() => this.state.favorites ? <div> <AllMoviesButton user={this.state.currentUser} handleClick={this.showFavorites}/> <br/> <AllMovies movies={this.state.favorites} /></div> : null}/>
+          <Route exact path='/favorites/:id' render={() => this.state.favorites ? <div> <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/> <AllMoviesButton user={this.state.currentUser} handleClick={this.showFavorites}/> <br/> <AllMovies movies={this.filteredMovies(this.state.favorites)} /></div> : null}/>
       </Switch>
     </div>
     );
   }
 }
 
-export default withRouter(App)
+
+
+
+
+export default App
 
 
 
