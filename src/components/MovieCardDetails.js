@@ -57,4 +57,4 @@ const MovieCardDetails = (props) => {
 
 
 }
-export default MovieCardDetails 
+export default MovieCardDetails

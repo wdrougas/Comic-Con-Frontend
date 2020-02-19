@@ -2,7 +2,7 @@ import React from 'react';
 import AllMovies from '../components/AllMovies'
 import '../App.css';
 import MovieCardDetails from '../components/MovieCardDetails'
-import {Route, Switch, Redirect} from 'react-router-dom'
+import {Route, Switch, Redirect, withRouter} from 'react-router-dom'
 import HeaderComponent from '../components/HeaderComponent'
 import Searchbar from '../components/Searchbar'
 import swal from 'sweetalert'
@@ -83,7 +83,7 @@ addFavorites = (movieDetails) => {
   }
 
   removeFromFavorites = (favoriteObj) => {
-    console.log(favoriteObj)
+  
       const configOptions = {
         method:"DELETE",
         headers: {
@@ -91,8 +91,11 @@ addFavorites = (movieDetails) => {
           "Accept":"application/json"
         }
       }
+      const removalIndex = this.state.favorites.findIndex(favorite => favorite.id === favoriteObj.id)
       fetch(`http://localhost:3000/favorites/${favoriteObj.id}`, configOptions)
       .then(response => response.json())
+      .then(favorite => this.setState({favorites: [...this.state.favorites.slice(0, removalIndex), ...this.state.favorites.slice(removalIndex + 1)]}))
+      this.props.history.push(`/favorites/${this.state.currentUser.id}`)
   }
 
   handleChange = (e) => {
@@ -141,7 +144,7 @@ addFavorites = (movieDetails) => {
 {/* <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/>  */}
 
 
-export default App
+export default withRouter(App)
 
 
 
