@@ -6,6 +6,7 @@ import NumberFormat from 'react-number-format'
 
 
 const MovieCardDetails = (props) => {
+  debugger
     return (
         <div className = 'ui two column centered grid'>
     <Container>
@@ -43,13 +44,14 @@ const MovieCardDetails = (props) => {
       </div>
       </Link>}
       </div>
+      {props.favorites.map(favorite => favorite.movie).some(movie => movie.id === props.movieDetails.id) ? 
       <div className="ui vertical animated button" tabIndex="0">
       <div className="hidden content"
       onClick={() => props.removeFromFavorites(props.favorites.find(favorite => favorite.movie_id === props.movieDetails.id))}>Remove from Favorites</div>
       <div className="visible content">
       <i className="trash icon"></i>
       </div>
-      </div>
+      </div> : null }
     </Container> 
     </div>
     )
