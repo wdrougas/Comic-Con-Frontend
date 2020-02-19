@@ -18,7 +18,6 @@ class App extends React.Component {
     this.state = {
         movies: [],
         favorites: [],
-        favoriteObjects: [],
         movieDetail: null,
         search: '',
         currentUser: null,
@@ -54,10 +53,10 @@ logout = () => {
 showFavorites = (user) => {
   fetch(`http://localhost:3000/users/${user.id}`)
   .then(resp => resp.json())
-  .then(data => this.setState({favorites: data.movies}))
+  .then(data => this.setState({favorites: data.favorites}))
 }  
 
- 
+
 
 addFavorites = (movieDetails) => {
     const configOptions = {
@@ -71,10 +70,10 @@ addFavorites = (movieDetails) => {
 
     fetch('http://localhost:3000/favorites',configOptions)
     .then(response => response.json())
-    .then(data => { 
+    .then(data => {
       if (data.message === "Movie added to favorites!") {
         let newObj = JSON.parse(data.favorite)
-        this.setState({favoriteObjects: [...this.state.favoriteObjects, newObj]})
+        this.setState({favorites: [...this.state.favorites, newObj]})
         swal("Done!", data.message, "success")
       } else {
         swal("Error!", data.message, 'error')
@@ -135,7 +134,7 @@ addFavorites = (movieDetails) => {
           addFavorites ={this.addFavorites}
           removeFromFavorites={this.removeFromFavorites}
           />: null}} /> 
-          <Route exact path='/favorites/:id' render={() => this.state.favorites ? <div> <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/> <AllMoviesButton user={this.state.currentUser} handleClick={this.showFavorites}/> <br/> <AllMovies movies={this.filteredMovies(this.state.favorites)} /></div> : null}/>
+          <Route exact path='/favorites/:id' render={() => this.state.favorites ? <div> <AllMoviesButton user={this.state.currentUser} handleClick={this.showFavorites}/> <br/> <AllMovies movies={this.state.favorites.map(favorite => favorite.movie)} /></div> : null}/>
       </Switch>
     </div>
     );
@@ -143,7 +142,7 @@ addFavorites = (movieDetails) => {
 }
 
 
-
+{/* <Searchbar onSearch={this.onSearch} handleChange={this.handleChange}/>  */}
 
 
 export default App
