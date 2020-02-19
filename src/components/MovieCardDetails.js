@@ -45,7 +45,7 @@ const MovieCardDetails = (props) => {
       </div>
       <div className="ui vertical animated button" tabIndex="0">
       <div className="hidden content"
-      onClick={() => props.removeFromFavorites(props.favorite)}>Remove from Favorites</div>
+      onClick={() => props.removeFromFavorites(props.favorites.find(favorite => favorite.movie_id === props.movieDetails.id))}>Remove from Favorites</div>
       <div className="visible content">
       <i className="trash icon"></i>
       </div>

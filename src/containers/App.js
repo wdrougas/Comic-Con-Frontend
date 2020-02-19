@@ -82,23 +82,18 @@ addFavorites = (movieDetails) => {
 
   }
 
-  // NOT WORKING
-  // removeFromFavorites = (favoriteObj) => {
-  //   if (this.state.favoriteObjects.includes(favoriteObj)) {
-  //     const configOptions = {
-  //       method:"DELETE",
-  //       headers: {
-  //         "Content-Type":"application/json",
-  //         "Accept":"application/json"
-  //       }
-  //     }
-  //     fetch(`http://localhost:3000/favorites/${favoriteObj[0].id}`, configOptions)
-  //     .then(response => response.json())
-
-  //   } else {
-  //     alert("Movie is not included in your favorites")
-  //   }
-  // }
+  removeFromFavorites = (favoriteObj) => {
+    console.log(favoriteObj)
+      const configOptions = {
+        method:"DELETE",
+        headers: {
+          "Content-Type":"application/json",
+          "Accept":"application/json"
+        }
+      }
+      fetch(`http://localhost:3000/favorites/${favoriteObj.id}`, configOptions)
+      .then(response => response.json())
+  }
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value})
@@ -133,6 +128,7 @@ addFavorites = (movieDetails) => {
           movieDetails={foundMovie} 
           addFavorites ={this.addFavorites}
           removeFromFavorites={this.removeFromFavorites}
+          favorites={this.state.favorites}
           />: null}} /> 
           <Route exact path='/favorites/:id' render={() => this.state.favorites ? <div> <AllMoviesButton user={this.state.currentUser} handleClick={this.showFavorites}/> <br/> <AllMovies movies={this.state.favorites.map(favorite => favorite.movie)} /></div> : null}/>
       </Switch>
